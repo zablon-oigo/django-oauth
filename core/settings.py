@@ -105,7 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_PORT = env.int("PORT")
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("PASSWORD")
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
