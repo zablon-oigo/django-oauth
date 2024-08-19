@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
-from .serializers import UserRegisterSerializer
+from .serializers import UserRegisterSerializer,LoginSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .utils import send_code_to_user 
@@ -42,4 +42,14 @@ class VerifyUserEmail(GenericAPIView):
                 'message':'passcode not provided'
             },
             status=status.HTTP_404_NOT_FOUND)
+
+class LoginUser(GenericAPIView):
+    serializer_class=LoginSerializer
+
+    def post(self,request):
+        serializer=self.serializer_class(data=request.data,context={'request':request})
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
