@@ -93,3 +93,33 @@ class PasswordResetRequestSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
     
 
+class SetNewPasswordSerializer(serializers.ModelSerializer):
+    password=serializers.CharField(max_length=100, min_length=6, write_only=True)
+    confirm_password=serializers.CharField(max_length=100, min_length=6, write_only=True)
+    uidb64=serializers.CharField(write_only=True)
+    token=serializers.CharField(write_only=True)
+
+    class Meta:
+        model=CustomUser
+        fields=["password","confirm_password","uidb64","token"]
+    
+    def validate(self, attrs):
+        try:
+            token=attrs.get('token'),
+            uidb64=attrs.get('uidb64'),
+            password=attrs.get('password'),
+            confirm_password=attrs.get('confirm_password')
+
+            user_id=force_str(urlsafe_base64_decode(uidb64))
+            user=CustomUser.objects.get(id=user_id)
+
+            if not PasswordResetTokenGenerator().check_token(user,token):
+                raise AuthenticationFailed("reset link is invalid or has expired", 401)
+            
+            if password != confirm_password:
+                raise AuthenticationFailed("passwords do not match")
+            user.set_password(password)
+            user.save()
+            return user
+        except Exception as e:
+            return AuthenticationFailed("link is invalid or has expired")
