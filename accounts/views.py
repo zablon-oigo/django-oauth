@@ -9,7 +9,6 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import smart_str,DjangoUnicodeDecodeError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from .models import CustomUser
-from django.core.exceptions import ObjectDoesNotExist
 class RegisterUserView(GenericAPIView):
     serializer_class=UserRegisterSerializer
 
@@ -86,7 +85,7 @@ class PasswordResetConfirm(GenericAPIView):
                 'uidb64':uidb64,
                 'token':token
             },status=status.HTTP_200_OK)
-        except (DjangoUnicodeDecodeError, ObjectDoesNotExist):
+        except DjangoUnicodeDecodeError:
             return Response({'message':'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
 
