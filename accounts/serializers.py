@@ -65,11 +65,10 @@ class LoginSerializer(serializers.ModelSerializer):
             'refresh_token':user_tokens.get('refresh'),
         }
     
-class PasswordResetRequestSerializer(serializers.ModelSerializer):
+class PasswordResetRequestSerializer(serializers.Serializer):
     email=serializers.EmailField(max_length=255)
 
     class Meta:
-        model=CustomUser
         fields=['email']
     
     def validate(self, attrs):
@@ -93,21 +92,20 @@ class PasswordResetRequestSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
     
 
-class SetNewPasswordSerializer(serializers.ModelSerializer):
+class SetNewPasswordSerializer(serializers.Serializer):
     password=serializers.CharField(max_length=100, min_length=6, write_only=True)
     confirm_password=serializers.CharField(max_length=100, min_length=6, write_only=True)
     uidb64=serializers.CharField(write_only=True)
     token=serializers.CharField(write_only=True)
 
     class Meta:
-        model=CustomUser
         fields=["password","confirm_password","uidb64","token"]
     
     def validate(self, attrs):
         try:
-            token=attrs.get('token'),
-            uidb64=attrs.get('uidb64'),
-            password=attrs.get('password'),
+            token=attrs.get('token')
+            uidb64=attrs.get('uidb64')
+            password=attrs.get('password')
             confirm_password=attrs.get('confirm_password')
 
             user_id=force_str(urlsafe_base64_decode(uidb64))
