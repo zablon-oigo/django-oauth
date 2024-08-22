@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from django.utils import timezone
 from .managers import CustomUserManager
 from rest_framework_simplejwt.tokens import RefreshToken
+AUTH_PROVIDERS={
+    'email':'email','google':'google','github':'github'
+}
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField("Email Address",unique=True)
     first_name=models.CharField("First Name",max_length=100)
@@ -13,6 +16,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     is_active=models.BooleanField(default=True)
     date_joined=models.DateTimeField(default=timezone.now)
     last_login=models.DateTimeField(auto_now=True)
+    auth_provider=models.CharField(max_length=50,default=AUTH_PROVIDERS.get("email"))
 
     USERNAME_FIELD="email"
     REQUIRED_FIELDS=["first_name","last_name"]
