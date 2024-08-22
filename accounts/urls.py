@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import RegisterUserView,VerifyUserEmail,LoginUser,PasswordResetConfirm,SetNewPassword,PasswordResetRequestView,LogoutUserView
+from social.views import GoogleSignInView
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 urlpatterns=[
     path("register/",RegisterUserView.as_view(),name="register"),
@@ -10,6 +11,7 @@ urlpatterns=[
     path("password-reset/",PasswordResetRequestView.as_view(),name="password-reset"),
     path("password-reset-confirm/<uidb64>/<token>/",PasswordResetConfirm.as_view(), name="password-reset-confirm"),
     path("set-new-password/",SetNewPassword.as_view(),name="set-password"),
-    path("logout/",LogoutUserView.as_view(),name="logout")
+    path("logout/",LogoutUserView.as_view(),name="logout"),
+    path("google/",GoogleSignInView.as_view(),name="google"),
 
 ]
