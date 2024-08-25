@@ -4,11 +4,12 @@ import Login from './components/Login'
 import Profile from './components/Profile'
 import VerifyEmail from './components/VerifyEmail'
 import ForgetPassword from './components/ForgetPassword'
-
+import { ToastContainer } from 'react-toastify'
 function App() {
   return (
     <>
     <section className="">
+      <ToastContainer/>
       <Router>
         <Routes>
           <Route path="/" element={<Signup/>}/>
