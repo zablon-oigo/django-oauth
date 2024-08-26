@@ -109,14 +109,18 @@ export default function Signup() {
           />
         </div>
         
-        <input type="submit" value="Submit" className="w-[80%] px-6 py-3 mx-auto mt-2 text-white bg-teal-700 rounded-lg" />
+        <input type="submit" value="Submit" className="w-[80%] px-6 py-3 mx-auto mt-2 hover:bg-teal-600 text-white bg-teal-700 rounded-lg" />
       </form>
       
-      <h3 className="">or</h3>
       
-      <div className="">
+      <h3 className="">or</h3>
+      <div className="flex justify-center">
+        <div className="">
         <button className="">Sign Up with Google</button>
-        <button className="">Sign Up with GitHub</button>
+        </div>
+       <div className="">
+       <button className="">Sign Up with GitHub</button>
+       </div>
       </div>
     </section>
   );
