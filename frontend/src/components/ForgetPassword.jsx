@@ -1,6 +1,10 @@
 
 export default function ForgetPassword() {
   return (
-    <div>ForgetPassword</div>
+    <section className="">
+      <div className="">
+        
+      </div>
+    </section>
   )
 }
