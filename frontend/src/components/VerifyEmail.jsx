@@ -1,6 +1,13 @@
 import { useState } from "react"
 export default function VerifyEmail() {
   const[otp,setOTP]=useState("")
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    if(otp){
+      const response=await axios.post("")
+
+    }
+  }
   return (
     <section className="max-w-3xl px-10 py-10 mx-auto bg-gray-100 my-60 rounded-xl">
       <form action="" className="max-w-sm mx-auto">
