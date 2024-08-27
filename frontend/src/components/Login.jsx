@@ -4,7 +4,7 @@ export default function Login() {
     <section className="max-w-3xl px-10 py-10 mx-auto bg-gray-100 my-60">
       
       <form action="" className="max-w-sm mx-auto ">
-      <h2 className="text-3xl text-center capitalize">
+      <h2 className="text-3xl font-semibold text-center capitalize">
         login
       </h2>
       <div className="flex flex-col mt-2">
