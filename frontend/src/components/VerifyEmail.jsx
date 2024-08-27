@@ -4,7 +4,7 @@ export default function VerifyEmail() {
   const handleSubmit=async(e)=>{
     e.preventDefault()
     if(otp){
-      const response=await axios.post("")
+      const response=await axios.post("http://127.0.0.1:8000/api/verify/",{"otp":otp})
 
     }
   }
