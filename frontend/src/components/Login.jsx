@@ -32,7 +32,7 @@ export default function Login() {
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/login/", formData);
       if (response.status === 200) {
-        navigate("");
+        navigate("/dashboard");
         toast.success("Login successful!");
       }
     } catch (err) {
