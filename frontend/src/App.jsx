@@ -5,6 +5,7 @@ import Profile from './components/Profile'
 import VerifyEmail from './components/VerifyEmail'
 import ForgetPassword from './components/ForgetPassword'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
