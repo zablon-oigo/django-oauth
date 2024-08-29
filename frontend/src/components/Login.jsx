@@ -31,7 +31,14 @@ export default function Login() {
 
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/login/", formData);
+      const user={
+        "email":response.email,
+        "names":response.full_name
+      }
       if (response.status === 200) {
+        localStorage.setItem("user",JSON.stringify(user))
+        localStorage.setItem('access',JSON.stringify(response.access_token))
+        localStorage.setItem("refresh",JSON.stringify(response.refresh_token))
         navigate("/dashboard");
         toast.success("Login successful!");
       }
