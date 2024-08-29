@@ -10,7 +10,11 @@ export default function Profile() {
       navigate("/login")
     }
    },[])
-
+   const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('access');
+    navigate("/login");
+  };
   return (
     <section className="max-w-md p-6 mx-auto bg-white rounded-lg shadow-md">
       <div className="flex flex-col items-center">
@@ -18,7 +22,8 @@ export default function Profile() {
           Hello, {user && user.full_name}
         </h2>
         <p className="mb-4 text-gray-600">Welcome back to your profile!</p>
-        <button 
+        <button
+         onClick={handleLogout} 
           className="px-4 py-2 text-white transition duration-300 bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
         >
           Logout
